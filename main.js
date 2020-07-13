@@ -9,8 +9,10 @@ function gitUser(user){
             if(xhr.readyState === 4)
                 if(xhr.status === 200)//200 é o código de status HTTP para *SUCESSO*
                     resolve(JSON.parse(xhr.responseText))//Retornará o valor obtido da API em caso de sucesso
-                 else 
-                    reject ('Erro na requisição')//Retorna o valor do reject em caso de falha.
+                 else if(xhr.status === 404)
+                    reject ('Usuário não encontrado')//Retorna o valor do reject em caso de falha.
+                else
+                    reject ('Erro na requisição')
             }
         })
 
@@ -31,6 +33,7 @@ btn.addEventListener("click", function(){
         })
         .catch(function(error){
             console.warn(error)
+            window.alert(error)
         })
 })
 
